@@ -21,3 +21,4 @@
 (load-directory conf-edit-dir)
 (load-directory widget-dir)
 
+(put 'upcase-region 'disabled nil)

@@ -11,3 +11,11 @@
   (next-line 1)
   (yank))
 (global-set-key (kbd "C-d") 'duplicate-line)
+
+;; Highlight all parentheses
+(require 'highlight-parentheses)
+(define-globalized-minor-mode global-highlight-parentheses-mode
+highlight-parentheses-mode
+(lambda ()
+(highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)
