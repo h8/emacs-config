@@ -120,3 +120,7 @@
   (lambda ()
     (highlight-parentheses-mode t)))
 (global-highlight-parentheses-mode t)
+
+;; project-explorer settings
+(setq pe/cache-enabled t)
+(setq pe/width 50)

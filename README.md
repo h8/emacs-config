@@ -20,3 +20,6 @@ Just works, save files to /tmp
 
 ### IBuffer
 Shows all opened buffer in separate window, \<f5\>
+
+### Project-explorer
+[See this manual](https://github.com/sabof/project-explorer)
