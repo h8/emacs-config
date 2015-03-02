@@ -124,3 +124,7 @@
 ;; project-explorer settings
 (setq pe/cache-enabled t)
 (setq pe/width 50)
+
+;; flycheck settings
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq flycheck-rust-check-tests t)

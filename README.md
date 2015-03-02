@@ -23,3 +23,6 @@ Shows all opened buffer in separate window, \<f5\>
 
 ### Project-explorer
 [See this manual](https://github.com/sabof/project-explorer)
+
+### Flycheck mode
+[See this manual](https://flycheck.readthedocs.org/en/latest/index.html)
