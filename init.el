@@ -103,6 +103,20 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
-;; cleanup whitespace on save
+;; show trailing white spaces and empty lines
 (setq-default indicate-empty-lines t
               show-trailing-whitespace t)
+
+;; auto indent on ret
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+;; Disable toolbar
+(tool-bar-mode -1)
+
+;; Highlight all parentheses
+(require 'highlight-parentheses)
+(define-globalized-minor-mode global-highlight-parentheses-mode
+  highlight-parentheses-mode
+  (lambda ()
+    (highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)
