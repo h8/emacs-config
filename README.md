@@ -26,3 +26,6 @@ Shows all opened buffer in separate window, \<f5\>
 
 ### Flycheck mode
 [See this manual](https://flycheck.readthedocs.org/en/latest/index.html)
+
+### Toggle comment on a current line
+\<C-?\>

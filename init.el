@@ -128,3 +128,15 @@
 ;; flycheck settings
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (setq flycheck-rust-check-tests t)
+
+;; comment or uncomment current line
+(defun toggle-comment-on-line ()
+  "comment or uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+(global-set-key (kbd "C-?") 'toggle-comment-on-line)
+
+;; erlang edts mode
+(add-hook 'after-init-hook 'my-after-init-hook)
+(defun my-after-init-hook ()
+  (require 'edts-start))
