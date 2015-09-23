@@ -1,6 +1,7 @@
 ;; Package management
 (require 'package)
 
+;;; Code:
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
@@ -112,6 +113,9 @@
 
 ;; Disable toolbar
 (tool-bar-mode -1)
+
+;; quick alias for yes and no
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Highlight all parentheses
 (require 'highlight-parentheses)
