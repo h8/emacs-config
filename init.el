@@ -132,7 +132,6 @@
 
 ;; flycheck settings
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(setq flycheck-rust-check-tests t)
 
 ;; comment or uncomment current line
 (defun toggle-comment-on-line ()
@@ -140,3 +139,8 @@
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-?") 'toggle-comment-on-line)
+
+;; company
+(add-hook 'cider-repl-mode-hook #'company-mode)
+(add-hook 'cider-mode-hook #'company-mode)
+

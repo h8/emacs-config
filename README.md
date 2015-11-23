@@ -10,7 +10,7 @@
 - project-explorer
 - flycheck
 - cider
-- ac-cider
+- company
 
 ### Popup-switcher
 Shows buffer switch popup, \<C-tab\>
@@ -41,3 +41,6 @@ Shows all opened buffer in separate window, \<f5\>
 
 ### Toggle comment on a current line
 \<C-?\>
+
+### CIDER for Clojure
+[See this manual](https://github.com/clojure-emacs/cider)
