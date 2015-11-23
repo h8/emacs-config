@@ -1,5 +1,17 @@
 # Overview of my EMACS configuration
 
+### Packages that needs to be installed
+- popup-switcher
+- markdown-mode
+- rw-hunspell
+- rw-ispell
+- rw-language-and-country-codes
+- highlight-parentheses
+- project-explorer
+- flycheck
+- cider
+- ac-cider
+
 ### Popup-switcher
 Shows buffer switch popup, \<C-tab\>
 

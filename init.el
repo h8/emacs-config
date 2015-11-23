@@ -139,8 +139,3 @@
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-?") 'toggle-comment-on-line)
-
-;; erlang edts mode
-(add-hook 'after-init-hook 'my-after-init-hook)
-(defun my-after-init-hook ()
-  (require 'edts-start))
