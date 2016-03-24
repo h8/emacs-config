@@ -10,6 +10,8 @@
 
 (package-initialize)
 
+(setq inhibit-startup-message t)
+
 ;; ido mode for switching buffers
 (ido-mode 1)
 (setq ido-separator "\n")
@@ -140,32 +142,13 @@
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-?") 'toggle-comment-on-line)
 
-;; company
-(add-hook 'cider-repl-mode-hook #'company-mode)
-(add-hook 'cider-mode-hook #'company-mode)
+;; load additional init files on demand
+(defun load-user-file (name)
+  (interactive "sFile to load: ")
+  (load-file (expand-file-name (concat name ".el") "~/.emacs.d/")))
 
+;; turn on buffer erase
 (put 'erase-buffer 'disabled nil)
-
-(require 'clojure-mode)
-
-(define-clojure-indent
-  (defroutes 'defun)
-  (GET 2)
-  (POST 2)
-  (PUT 2)
-  (DELETE 2)
-  (HEAD 2)
-  (ANY 2)
-  (context 2))
-
-;; CIDER configuration
-
-(setq cider-repl-pop-to-buffer-on-connect nil)
-(setq cider-popup-stacktraces nil)
-(setq cider-repl-popup-stacktraces t)
-(setq cider-auto-select-error-buffer t)
-(setq nrepl-buffer-name-separator "-")
-(setq nrepl-buffer-name-show-port t)
 
 (provide 'init)
 ;;; init.el ends here
