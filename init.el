@@ -1,7 +1,13 @@
-;; Package management
-(require 'package)
+;;; init.el --- Emacs configuration
+
+;;; Commentary:
+;;; See Readme.md for further details
 
 ;;; Code:
+
+;;(package-initialize)
+(require 'package)
+
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -10,6 +16,18 @@
 
 (package-initialize)
 
+;; use-package initialization
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; quick alias for yes and no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Skip startup message buffer
 (setq inhibit-startup-message t)
 
 ;; ido mode for switching buffers
@@ -17,26 +35,34 @@
 (setq ido-separator "\n")
 
 ;; popup switcher
-(require 'popup-switcher)
-(setq psw-in-window-center t)
-(global-set-key (kbd "<C-tab>") 'psw-switch-buffer)
+(use-package popup-switcher
+  :init (setq psw-in-window-center t)
+  :bind ("<C-tab>" . psw-switch-buffer))
 
 ;; markdown mode
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(use-package markdown-mode
+  :mode
+  (("\\.text\\'" . markdown-mode)
+   ("\\.markdown\\'" . markdown-mode)
+   ("\\.md\\'" . markdown-mode)))
+
+;; flycheck settings
+(use-package flycheck
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 ;; spell checking
-(require 'rw-language-and-country-codes)
-(require 'rw-ispell)
-(require 'rw-hunspell)
+(use-package rw-language-and-country-codes)
+(use-package rw-ispell)
+(use-package rw-hunspell)
 
 (setq ispell-program-name "hunspell")
-(setq ispell-dictionary "en_US_hunspell")
+(setq ispell-dictionary "en_US")
 
 (custom-set-variables
- '(rw-hunspell-default-dictionary "en_US_hunspell")
+ '(rw-hunspell-default-dictionary "en_US")
  '(rw-hunspell-dicpath-list (quote ("/usr/share/hunspell")))
  '(rw-hunspell-make-dictionary-menu t)
  '(rw-hunspell-use-rw-ispell t)
@@ -45,20 +71,17 @@
 (defun fd-switch-dictionary()
   (interactive)
   (let* ((dic ispell-current-dictionary)
-	 (change (if (string= dic "en_US_hunspell") "ru_RU_hunspell" "en_US_hunspell")))
+	 (change (if (string= dic "en_US") "ru_RU" "en_US")))
     (ispell-change-dictionary change)
     (message "Dictionary switched from %s to %s" dic change)))
 
 (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
 
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
 ;; duplicate current line
 (defun duplicate-line-or-region (&optional n)
   "Duplicate current line, or region if active.
-    With argument N, make N copies.
-    With negative N, comment out original line and use the absolute value."
+With argument N, make N copies.
+With negative N, comment out original line and use the absolute value."
   (interactive "*p")
   (let ((use-region (use-region-p)))
     (save-excursion
@@ -117,11 +140,8 @@
 ;; Disable toolbar
 (tool-bar-mode -1)
 
-;; quick alias for yes and no
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; Highlight all parentheses
-(require 'highlight-parentheses)
+(use-package highlight-parentheses)
 (define-globalized-minor-mode global-highlight-parentheses-mode
   highlight-parentheses-mode
   (lambda ()
@@ -129,15 +149,14 @@
 (global-highlight-parentheses-mode t)
 
 ;; project-explorer settings
-(setq pe/cache-enabled t)
-(setq pe/width 50)
-
-;; flycheck settings
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package project-explorer
+  :init
+  (setq pe/width 20)
+  (setq pe/cache-enabled t))
 
 ;; comment or uncomment current line
 (defun toggle-comment-on-line ()
-  "comment or uncomment current line"
+  "Comment or uncomment current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-?") 'toggle-comment-on-line)
@@ -149,6 +168,15 @@
 
 ;; turn on buffer erase
 (put 'erase-buffer 'disabled nil)
+
+;; Company mode
+(use-package company
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config (use-package company-web)
+)
+
+;; Elixir and Phoenix
+(use-package alchemist)
 
 (provide 'init)
 ;;; init.el ends here

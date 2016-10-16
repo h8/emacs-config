@@ -1,6 +1,6 @@
-# Overview of my EMACS configuration
+# Overview of h8's EMACS configuration
 
-### Packages that needs to be installed
+### All required packages will be installed automatically via use-package
 - popup-switcher
 - markdown-mode
 - rw-hunspell
@@ -9,8 +9,11 @@
 - highlight-parentheses
 - project-explorer
 - flycheck
-- cider
+- alchemist
 - company
+
+### Use-package
+An alternate way of requiring el-packages. [Home](https://github.com/jwiegley/use-package)
 
 ### Popup-switcher
 Shows buffer switch popup, \<C-tab\>
@@ -42,5 +45,5 @@ Shows all opened buffer in separate window, \<f5\>
 ### Toggle comment on a current line
 \<C-?\>
 
-### CIDER for Clojure
-[See this manual](https://github.com/clojure-emacs/cider)
+### Alchemist mode for Elixir and Phoenix
+[Documentation](http://alchemist.readthedocs.io/en/latest/)
