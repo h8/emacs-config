@@ -24,6 +24,9 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; never use tabs for indent
+(setq-default indent-tabs-mode nil)
+
 ;; quick alias for yes and no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -177,6 +180,9 @@ With negative N, comment out original line and use the absolute value."
 
 ;; Elixir and Phoenix
 (use-package alchemist)
+
+;; two tabs for JavaScript
+(setq js-indent-level 2)
 
 (provide 'init)
 ;;; init.el ends here
