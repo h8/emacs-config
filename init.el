@@ -184,5 +184,8 @@ With negative N, comment out original line and use the absolute value."
 ;; two tabs for JavaScript
 (setq js-indent-level 2)
 
+;; JSX mode for ReactJS
+(use-package rjsx-mode)
+
 (provide 'init)
 ;;; init.el ends here
