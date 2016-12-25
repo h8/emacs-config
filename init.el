@@ -27,6 +27,9 @@
 ;; never use tabs for indent
 (setq-default indent-tabs-mode nil)
 
+;; rebind windmove default to "win" key
+(windmove-default-keybindings 's)
+
 ;; quick alias for yes and no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -186,6 +189,9 @@ With negative N, comment out original line and use the absolute value."
 
 ;; JSX mode for ReactJS
 (use-package rjsx-mode)
+
+;; two tabs for RJSX mode
+(setq js2-basic-offset 2)
 
 (provide 'init)
 ;;; init.el ends here
